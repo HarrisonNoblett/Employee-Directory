@@ -2,16 +2,9 @@ import React from "react";
 import "./style.css";
 
 function Directory(props) {
-    // create state variable to hold the search input value
     console.log(props);
-  state = { search: '' }
-  const { employees } = props;
-  const handleTyping = e => {
-      
-  };
+    const { employees } = props;
 
-  // to filter by search term
-  // employees.fitler(emp => ).map
   return (
     <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
@@ -25,9 +18,6 @@ function Directory(props) {
                     <div className="input-group m-3">
                         <button className="btn btn-outline-primary" type="button" id="button-addon1">Search</button>
                         <input
-                            value={state.search}
-                            //onKeyUp={handleTyping}
-                            onChange={e => this.setState({ search: e.target.value })}
                             type="text"
                             className="form-control"
                             placeholder="Search Employee"
@@ -36,15 +26,31 @@ function Directory(props) {
                     </div>
                 </div>
             </div>
-        </div>
-        <div className="employeeList">
-            {
-                employees.map(emp => (
-                    <div className="Employee">
-                        {`${emp.name.title} ${emp.name.first} ${emp.name.last}`}
+            <div className="row">
+                <div className="col-md-12">
+                    <div className="employeeList">
+                        <ul>
+                            <li>
+                            {
+                                employees.map(emp => (
+                                    <div className="Employee row">
+                                        <div className="col-md-4">
+                                            SSN: {`${emp.id.value}`}
+                                        </div>
+                                        <div className="col-md-4">
+                                           Age: {`${emp.dob.age}`}
+                                        </div>
+                                        <div className="col-md-4">
+                                            {`${emp.name.title}`}. {`${emp.name.last}`}, {`${emp.name.first}`}
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                            </li>
+                        </ul>
                     </div>
-                ))
-            }
+                </div>
+            </div>
         </div>
     </div>
   );
