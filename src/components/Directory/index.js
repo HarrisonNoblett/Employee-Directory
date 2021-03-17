@@ -4,6 +4,14 @@ import "./style.css";
 function Directory(props) {
     console.log(props);
     const { employees } = props;
+    
+
+    const handleInputChange = (e) => {
+        console.log(e.target.value)
+
+        const filteredEmployees = employees.filter(emp => emp.name.first.toLowerCase().includes(e.target.value.toLowerCase()))
+        console.log(filteredEmployees)
+    };
 
   return (
     <div>
@@ -18,6 +26,7 @@ function Directory(props) {
                     <div className="input-group m-3">
                         <button className="btn btn-outline-primary" type="button" id="button-addon1">Search</button>
                         <input
+                            onChange={e => handleInputChange(e)}
                             type="text"
                             className="form-control"
                             placeholder="Search Employee"
@@ -33,15 +42,18 @@ function Directory(props) {
                             <li>
                             {
                                 employees.map(emp => (
-                                    <div className="Employee row">
-                                        <div className="col-md-4">
+                                    <div className="Employee row m-4">
+                                        <div className="col-md-3">
+                                            <img src={`${emp.picture.medium}`} alt="empPhoto"></img>
+                                        </div>
+                                        <div className="col-md-3">
+                                            {`${emp.name.title}`}. {`${emp.name.last}`}, {`${emp.name.first}`}
+                                        </div>
+                                        <div className="col-md-3">
                                             SSN: {`${emp.id.value}`}
                                         </div>
-                                        <div className="col-md-4">
+                                        <div className="col-md-3">
                                            Age: {`${emp.dob.age}`}
-                                        </div>
-                                        <div className="col-md-4">
-                                            {`${emp.name.title}`}. {`${emp.name.last}`}, {`${emp.name.first}`}
                                         </div>
                                     </div>
                                 ))
